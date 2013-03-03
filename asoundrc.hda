@@ -26,44 +26,7 @@ ctl.equal {
 #this should allow xbindkeys to control the master volume with xf86 up/down
 
 ####################
-#Soundcards setup
-
-#Soundblaster
-pcm.sbeq {
-  type plug;
-  slave.pcm sbequal;
-}
-
-pcm.sbequal {
-  type equal;
-  slave.pcm "soundblaster";
-}
-
-pcm.soundblaster {
-	type plug
-	slave.pcm "sbusb"
-}
-
-pcm.sbusb {
-    type dmix
-    ipc_key 1024 # must be unique!
-    slave {
-        pcm "hw:1,0"      # you cannot use a "plug" device here, darn.
-        period_time 0
-        period_size 1024 # must be power of 2
-        buffer_size 8192  # dito. It
-       format "S24_3LE"
-       rate 48000
-       #periods 128 # dito.
-    }
-}
-
-
-#Intel HDA
-pcm.hdaeq {
-  type plug;
-  slave.pcm intelequal;
-}
+#Soundcard setup
 
 pcm.intelequal {
   type equal;
